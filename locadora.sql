@@ -41,7 +41,7 @@ FOREIGN KEY(idLocadora) REFERENCES locadora(idLocadora)
 create table fornecedor (
   
 idFornecedor int not null,
-cnpj varchar(100),
+cnpj varchar(11),
 numLote varchar(100),
 
 PRIMARY KEY(idFornecedor)
@@ -64,7 +64,7 @@ FOREIGN KEY(idLocadora) REFERENCES locadora(idLocadora)
 
 create table fornecedorForneceVeiculo (
   
-FOREIGN KEY(idFornecedor) REFERENCES fornecedor(idFornecedor)
+FOREIGN KEY(idFornecedor) REFERENCES fornecedor(idFornecedor),
 FOREIGN KEY(idVeiculo) REFERENCES veiculo(idVeiculo)
 );
 
@@ -83,7 +83,41 @@ PRIMARY KEY(idLocacao)
 
 create table locacaoUtilizaVeiculo (
   
-FOREIGN KEY(idlocacao) REFERENCES locacao(idLocacao)
+FOREIGN KEY(idlocacao) REFERENCES locacao(idLocacao),
 FOREIGN KEY(idVeiculo) REFERENCES veiculo(idVeiculo)
 );
 
+create table c_físico (
+    
+idClienteF int not null, 
+login varchar (100) not null,
+senha varchar (100) not null,
+endereço varchar (100) not null,
+
+PRIMARY KEY (idClienteF),
+FOREIGN KEY(idLocadora) REFERENCES locadora(idLocadora)
+);
+
+create table c_jurídico (
+
+idClienteJ int not null,
+cnpj varchar (11) not null,
+atdAlugados int not null, 
+endereço varchar (100) not null,
+login varchar (100) not null,
+senha varchar(100) not null,
+
+PRIMARY KEY (idClienteJ),
+FOREIGN KEY (idLocadora) REFERENCES c_jurídico(idLocadora)
+);
+
+create table venda (
+
+idVenda int not null,
+precoVenda DECIMAL(10,2),
+dataVenda date not null,
+parcelas int not null,
+desconto DECIMAL(5,2)
+
+PRIMARY KEY (idVenda)
+);
