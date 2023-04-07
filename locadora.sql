@@ -121,3 +121,9 @@ desconto DECIMAL(5,2)
 
 PRIMARY KEY (idVenda)
 );
+
+create table vendaUtilizaveiculo (
+
+FOREIGN KEY (idVenda) REFERENCES venda (idVenda),
+FOREIGN KEY (idVeiculo) REFERENCES veiculo (idVeiculo)
+)
